@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  signupForm: FormGroup;
+  signUpForm: FormGroup;
   errorMessage: string;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
@@ -20,15 +20,15 @@ export class SignupComponent implements OnInit {
   }
 
   initForm() { //créer un user de type formGroup via la méthode formBuilder.group({}): permettant de définir les valeurs des champs avec une valeur par défaut, et des champs réquis ou un pattern
-    this.signupForm = this.formBuilder.group({
+    this.signUpForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]], //valide email
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]] //pattern de validation
     });
   }
 
   onSubmit() {
-    const email = this.signupForm.get('email').value; //charger les const email et password à partir de leur formControlName du formulaire
-    const password = this.signupForm.get('password').value;
+    const email = this.signUpForm.get('email').value; //charger les const email et password à partir de leur formControlName du formulaire
+    const password = this.signUpForm.get('password').value;
 
     this.authService.createNewUser(email, password).then(
       () => {
